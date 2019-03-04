@@ -49,11 +49,11 @@
 			let piece = e.dataTransfer.getData("text/plain");
 			e.target.appendChild(document.querySelector(`#${piece}`));
 		});
-	});	
+	});
 
 	function resetPuzzlePieces() {
 		// empty the thumbnail container
-		piecesBoard.innerHTML = "";
+		piecesBoard.innerHTML = "1";
 		creatPuzzlePieces(this.dataset.puzzleref)
 	}
 
