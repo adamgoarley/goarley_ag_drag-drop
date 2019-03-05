@@ -4,8 +4,8 @@
 	const pieces = ["topLeft", "topRight", "bottomLeft", "bottomRight"];
 
 	let piecesBoard = document.querySelector(".puzzle-pieces"),
-		puzzleBoard = document.querySelector(".puzzle-board"),
-		puzzleSelectors = document.querySelectorAll("#buttonHolder img");
+	  	puzzleBoard = document.querySelector(".puzzle-board"),
+	  	puzzleSelectors = document.querySelectorAll("#buttonHolder img");
 
 	let dropZones = document.querySelectorAll('.drop-zone');
 
@@ -46,6 +46,10 @@
 			e.preventDefault();
 			console.log("you droped sumpin on me");
 
+			if (zone.children.length > 0) {
+				return false;
+			}
+
 			let piece = e.dataTransfer.getData("text/plain");
 			e.target.appendChild(document.querySelector(`#${piece}`));
 		});
@@ -53,8 +57,14 @@
 
 	function resetPuzzlePieces() {
 		// empty the thumbnail container
-		piecesBoard.innerHTML = "1";
-		creatPuzzlePieces(this.dataset.puzzleref)
+		dropZones.forEach(zone => {
+			if (zone.children.length > 0) {
+				zone.removeChild(zone.children[0]);
+			}
+				piecesBoard.innerHTML = "";
+				creatPuzzlePieces(this.dataset.puzzleref);
+		});
+
 	}
 
 	// event handling down here
